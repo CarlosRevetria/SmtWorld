@@ -62,3 +62,8 @@
 	path = OCA/hr
 	url = git@github.com:OCA/hr.git
 	branch = 14.0
+
+[submodule "OCA/calendar"]
+	path = OCA/calendar
+	url = git@github.com:OCA/calendar.git
+	branch = 14.0
