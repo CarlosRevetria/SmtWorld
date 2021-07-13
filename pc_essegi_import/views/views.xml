@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+
+        <!--        <record id="view_essegi_import_form_custom" model="ir.ui.view">-->
+        <!--            <field name="name">stock.essegi.import.tree</field>-->
+        <!--            <field name="model">stock.picking</field>-->
+        <!--            <field eval="20" name="priority"/>-->
+        <!--            <field name="inherit_id" ref="stock.vpicktree"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//header/button[@name='do_unreserve']" position="after">-->
+        <!--                    <form string="Import a csv file">-->
+        <!--                        <field name="csv_file"/>-->
+        <!--                        <button name="import_csv" type="object" string="Import" class="oe_highlight"/>-->
+        <!--                        <button special="cancel" string="Cancel"/>-->
+
+        <!--                    </form>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <record id="your_wizard_form" model="ir.ui.view">
+            <field name="name">your.wizard.form</field>
+            <field name="model">your.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Import a csv file">
+                    <group name="main">
+                        <field name="csv_file"/>
+                    </group>
+
+                    <footer>
+                        <button name="import_csv" type="object"
+                                string="Import" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="your_wizard_action" model="ir.actions.act_window">
+            <field name="name">Import a csv file</field>
+            <field name="res_model">your.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!--                <menuitem action="your_wizard_action" id="menu_action_essegi_import" name="ESSEGI Import" parent="menu_stock_warehouse_mgmt"-->
+        <!--                          sequence="30"/>-->
+
+        <menuitem id="your_wizard_menu"
+                  name="Import ESSEGI"
+                  parent="stock.menu_stock_root"
+                  action="your_wizard_action"
+                  sequence="15"/>
+    </data>
+</odoo>
