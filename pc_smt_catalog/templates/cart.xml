@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--===================== Cart Page Banner =======================-->
+    <template id="cart_pc" inherit_id="website_sale.cart">
+        <xpath expr="//div[hasclass('oe_cart')]" position="attributes">
+            <attribute name="class">col-12 col-xl-12 oe_cart</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_cart')]/div/div/a[1]" position="replace">
+        </xpath>
+        <!--        <xpath expr="//div[hasclass('oe_cart')]/div/div/a[hasclass('')]" position="replace">-->
+        <!--        </xpath>-->
+        <xpath expr="//div[@id='o_cart_summary']" position="replace">
+            <!--            <t t-call="website_sale.short_cart_summary"/>-->
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <h2 class="title_catalog">Request a Budget</h2>
+                <form action="/my/oppo/new" method="post" class="form form-add2car"
+                      enctype="multipart/form-data" id="file_upload_form">
+                    <div class="form-group">
+                        <h3>Tell us about current throughput in your production:</h3>
+                    </div>
+                    <div class="form-group form-inline">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <label>1. Number of products required in production per year: </label>
+                        <input style="margin-left:10px;" type="number" name="products_required" class="form-control" value="0"></input>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label>2. Required cycle-time per board: </label>
+                        <input style="margin-left:10px;" type="number" name="cycle_time" class="form-control" value="0"></input>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label>3. Number of production shifts: </label>
+                        <input style="margin-left:10px;" type="number" name="production_shifts" class="form-control" value="0"></input>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label>4. How many different types of boards?: </label>
+                        <input style="margin-left:10px;" type="number" name="different_types" class="form-control" value="0"></input>
+                    </div>
+                    <div class="form-group">
+                        <h3>Technical details:</h3>
+                    </div>
+                    <div class="form-group">
+                        <label>1. Description of the application and what are the customers objectives: </label>
+                        <textarea name="description_application" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>2. Board dimensions and carries dimensions containing how many boards: </label>
+                        <textarea name="board_dimensions" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>3. Material(s) types: </label>
+                        <textarea name="materials_types" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>4. Types of Products that will be quoted: </label>
+                        <textarea name="types_products" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>5. Geometry size. L/I/H mm: </label>
+                        <textarea name="geometry_size" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <h3>Please tell us:</h3>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label>1. Estimated budget: </label>
+                        <input style="margin-left:10px;" type="number" name="estimated_budget" class="form-control" value="0"></input>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label>2. Estimated closing date: </label>
+                        <input style="margin-left:10px;" type="date" name="estimated_closing_date" class="form-control" value="0"></input>
+                    </div>
+                    <div class="form-group">
+                        <h3>Company details:</h3>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label>Company Name: </label>
+                        <input style="margin-left:10px;" type="text" name="company_name" class="form-control" value="" required="required"></input>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label>Name / Surname: </label>
+                        <input style="margin-left:10px;" type="text" name="name_surname" class="form-control" value="" required="required"></input>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label>Email / Phone: </label>
+                        <input style="margin-left:10px;" type="text" name="email_phone" class="form-control" value="" required="required"></input>
+                    </div>
+                    <button id="btn_add2car" type="submit"
+                            class="btn btn-primary mb-2">
+                        Enviar solicitud
+                    </button>
+                </form>
+            </div>
+        </xpath>
+    </template>
+</odoo>
