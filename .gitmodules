@@ -77,3 +77,8 @@
 	path = OCA/crm
 	url = git@github.com:OCA/crm.git
 	branch = 14.0
+
+[submodule "OCA/field-service"]
+	path = OCA/field-service
+	url = git@github.com:OCA/field-service.git
+	branch = 14.0
