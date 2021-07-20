@@ -62,3 +62,23 @@
 	path = OCA/calendar
 	url = git@github.com:OCA/calendar.git
 	branch = 14.0
+
+[submodule "OCA/partner-contact"]
+	path = OCA/partner-contact
+	url = git@github.com:OCA/partner-contact.git
+	branch = 14.0
+
+[submodule "OCA/timesheet"]
+	path = OCA/timesheet
+	url = git@github.com:OCA/timesheet.git
+	branch = 14.0
+
+[submodule "OCA/crm"]
+	path = OCA/crm
+	url = git@github.com:OCA/crm.git
+	branch = 14.0
+
+[submodule "OCA/helpdesk"]
+	path = OCA/helpdesk
+	url = git@github.com:OCA/helpdesk.git
+	branch = 14.0
