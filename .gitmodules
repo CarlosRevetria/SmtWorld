@@ -82,3 +82,8 @@
 	path = OCA/helpdesk
 	url = git@github.com:OCA/helpdesk.git
 	branch = 14.0
+
+[submodule "OCA/hr-expense"]
+	path = OCA/hr-expense
+	url = git@github.com:OCA/hr-expense.git
+	branch = 14.0
