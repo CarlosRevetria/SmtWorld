@@ -1,42 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!--=================== Product ========================-->
-    <template id="product_sticky_details_container_process"
-              inherit_id="theme_clarico_vega.product_sticky_details_container">
-        <xpath expr="//a[@id='add_to_cart']" position="replace">
-            <a role="button" id="add_to_cart_new"
-               t-attf-class="btn btn-primary btn-md mt16 a-submit te_theme_button te_add_to_cart #{'width-100' if not buy_now_show else 'width-50'}"
-               href="#">
-                Add
-            </a>
-        </xpath>
-    </template>
+    <!--=================== Product - > Este da error en produccion ========================-->
+    <!--    <template id="product_sticky_details_container_process"-->
+    <!--              inherit_id="theme_clarico_vega.product_sticky_details_container">-->
+    <!--        <xpath expr="//a[@id='add_to_cart']" position="replace">-->
+    <!--            <a role="button" id="add_to_cart_new"-->
+    <!--               t-attf-class="btn btn-primary btn-md mt16 a-submit te_theme_button te_add_to_cart #{'width-100' if not buy_now_show else 'width-50'}"-->
+    <!--               href="#">-->
+    <!--                Add-->
+    <!--            </a>-->
+    <!--        </xpath>-->
+    <!--    </template>-->
     <template id="product_catalog" inherit_id="website_sale.product" name="product" priority="20">
         <xpath expr="//section[@id='product_detail']" position="after">
             <t t-if="product">
                 <t t-call="pc_smt_catalog.html_content_catalog_product"/>
             </t>
         </xpath>
-        <xpath expr="//section[@id='product_detail']//div[hasclass('row')][2]" position="before">
-            <t t-if="product">
-                <t t-call="pc_smt_catalog.html_content_catalog_product_iframe"/>
-            </t>
-        </xpath>
+        <!--        <xpath expr="//section[@id='product_detail']//div[hasclass('row')][2]" position="before">-->
+        <!--            <t t-if="product">-->
+        <!--                <t t-call="pc_smt_catalog.html_content_catalog_product_iframe"/>-->
+        <!--            </t>-->
+        <!--        </xpath>-->
         <!--        <xpath expr="//div[hasclass('row')]/div[hasclass('col-lg-6')][2]" position="attributes">-->
         <!--            <attribute name="class">col-lg-12 col-md-12 col-sm-12 te_product_media</attribute>-->
         <!--        </xpath>-->
     </template>
 
-    <template id="html_content_catalog_product_iframe" name="Iframe Tour Virtual Product Catalog">
-        <iframe width="100%" height="500"
-                t-att-src="'https://www.youtube.com/embed/%s?controls=0' % product.url_tour_virtual"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen="allowfullscreen"></iframe>
+<!--    <template id="product_catalog_cart" inherit_id="theme_clarico_vega.product_sticky_details_container"-->
+<!--              name="product_cart_catalog" priority="200">-->
+<!--        &lt;!&ndash;        <xpath expr="//div[hasclass('prod_add_cart')]/a/span" position="attributes">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <attribute name="class">fa fa-calculator</attribute>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </xpath>&ndash;&gt;-->
+<!--        <xpath expr="//div[hasclass('product_details_sticky')]" position="replace">-->
+<!--            <p>LOL</p>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+    <!--    <template id="html_content_catalog_product_iframe" name="Iframe Tour Virtual Product Catalog">-->
+    <!--        <iframe width="100%" height="500"-->
+    <!--                t-att-src="'https://www.youtube.com/embed/%s?controls=0' % product.url_tour_virtual"-->
+    <!--                title="YouTube video player" frameborder="0"-->
+    <!--                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
+    <!--                allowfullscreen="allowfullscreen"></iframe>-->
+    <!--    </template>-->
+
+    <template id="header_cart_icon" inherit_id="website_sale.header_cart_link" name="Header Cart Icon">
+        <xpath expr="//i[hasclass('fa-shopping-cart')]" position="attributes">
+            <attribute name="class">fa fa-calculator</attribute>
+        </xpath>
     </template>
 
     <template id="html_content_catalog_product" name="Detail Product Catalog">
-        <section class="product_catalog_description" style="border-bottom: 1px solid #3e3e3e; margin-bottom:20px;">
+        <section class="product_catalog_description" style="margin-bottom:100px; margin-top:90px !important;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
@@ -101,14 +117,58 @@
                         <p>
                             <t t-esc="product.long_description"></t>
                         </p>
+                        <div class="row" style="margin-top:50px !important;">
+                            <div class="col-lg-2" t-if="product.features_column_1 and product.features_column_2">
+                                <a href="#features_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-features.png"/>
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="product.measures">
+                                <a href="#measures_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-measures.png"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="product.tech_details">
+                                <a href="#tech_details_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-tech-details.png"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="product.benefits1 or product.benefits2 or product.benefits3">
+                                <a href="#benefits_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-benefits.png"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="product.applications">
+                                <a href="#applications_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-application.png"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="attachments">
+                                <a href="#downloads_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-downloads.png"/>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <section style="margin-bottom:100px;">
+            <iframe width="100%" height="500"
+                    t-att-src="'https://www.youtube.com/embed/%s?controls=0' % product.url_tour_virtual"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen="allowfullscreen"></iframe>
+        </section>
 
         <section class="product_catalog_features">
             <div class="container">
-                <div class="row" style="margin-bottom:20px;">
+                <div class="row" style="margin-bottom:100px;"
+                     t-if="product.features_column_1 and product.features_column_2" id="features_box">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <h2 class="title_catalog">FEATURES</h2>
                     </div>
@@ -123,8 +183,8 @@
                         </p>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom:20px;">
-                    <div class="col-lg-6 col-md-6">
+                <div class="row" style="margin-bottom:100px;">
+                    <div class="col-lg-6 col-md-6" t-if="product.measures" id="measures_box">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <h2 class="title_catalog">MEASURES</h2>
                         </div>
@@ -134,7 +194,7 @@
                                   class="d-flex h-100 justify-content-center align-items-center"/>
                         </p>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" t-if="product.tech_details" id="tech_details_box">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <h2 class="title_catalog">TECH DETAILS</h2>
                         </div>
@@ -143,7 +203,8 @@
                         </p>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom:20px;">
+                <div class="row" style="margin-bottom:100px;"
+                     t-if="product.benefits1 or product.benefits2 or product.benefits3" id="benefits_box">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <h2 class="title_catalog">BENEFITS</h2>
                     </div>
@@ -166,7 +227,7 @@
                               class="d-flex h-100 justify-content-center align-items-center"/>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom:20px;">
+                <div class="row" style="margin-bottom:100px;" t-if="product.applications" id="applications_box">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <h2 class="title_catalog">APPLICATIONS</h2>
                     </div>
@@ -174,12 +235,28 @@
                         <t t-esc="product.applications"></t>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom:20px;">
+                <div class="row" style="margin-bottom:100px;" t-if="attachments" id="downloads_box">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <h2 class="title_catalog">DOWNLOADS</h2>
                     </div>
-                    <div class="col-lg-12 col-md-12">
-                        Aqui ponemos el modulo de descarga de documentacion añadida en la ficha de producto
+                    <div class="col-lg-12 col-md-12" id="box_download">
+                        <t t-if="attachments">
+                            <div class="product_attachment">
+                                <h4>Product Documents/Attachments</h4>
+
+                                <t t-foreach="attachments" t-as="attachment">
+                                    <form t-att-action="'/download/attachment?attachment_id=%i' % attachment.id"
+                                          method="post">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <button type="submit" class="btn btn-default" style="margin: 0 0 10px;">
+                                            <i class="fa fa-download"></i>
+                                            <span t-esc="attachment.file_name"/>
+                                        </button>
+                                    </form>
+                                </t>
+
+                            </div>
+                        </t>
                     </div>
                 </div>
             </div>
