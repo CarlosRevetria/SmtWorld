@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-        <record id="view_project_project_filter" model="ir.ui.view">
-            <field name="inherit_id" ref="project.view_project_project_filter"/>
-            <field name="model">project.project</field>
-            <field name="name">project.project.select</field>
-            <field name="arch" type="xml">
-                <xpath expr="//filter[@name='inactive']" position="after">
-                    <separator/>
-                    <filter string="Fechas de partes de horas" name="filter_timesheets_date" date="timesheets_date"/>
-                </xpath>
-            </field>
-        </record>
-
 
         <record model="ir.ui.view" id="send_mail_project_task_form_view">
             <field name="name">project.task.send.mail</field>
@@ -21,7 +9,6 @@
             <field name="arch" type="xml">
                 <xpath expr="//header" position='inside'>
                     <button name="action_task_report_send" string="Send by Email" type="object" class="btn-primary" help="Send mail to followers, can add another recipient"/>
-                    <button name="%(action_project_task_add_description)d" type="action" string="Add Description" class="btn-primary" help="Add a new line in the description field"/>
                 </xpath>
             </field>
         </record>
