@@ -75,7 +75,7 @@ class HrEmployee(models.Model):
 
     def _document_count(self):
         for each in self:
-            document_ids = self.env['hr.employee.document'].search([('employee_ref', '=', each.id)])
+            document_ids = self.env['hr.employee.document'].search([('employee_ref.id', '=', each.id)])
             each.document_count = len(document_ids)
 
 
