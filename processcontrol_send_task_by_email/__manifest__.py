@@ -21,9 +21,12 @@
 
     # always loaded
     'data': [
+        'report/report_services_part.xml',
         'data/mail_data.xml',
         'data/task_data.xml',
         'views/project_view.xml',
+        'views/task_view.xml',
+        'views/templates.xml',
     ]
     # only loaded in demonstration mode
     # 'demo': [

@@ -3,8 +3,8 @@
     <data noupdate="1">
 
         <record id="task_template" model="ir.config_parameter">
-            <field name="key">processcontrol_sale_order.task_template</field>
-            <field name="value" ref="processcontrol_sale_order.mail_template_task"/>
+            <field name="key">processcontrol_send_task_by_email.task_template</field>
+            <field name="value" ref="processcontrol_send_task_by_email.mail_template_task"/>
         </record>
 
     </data>
