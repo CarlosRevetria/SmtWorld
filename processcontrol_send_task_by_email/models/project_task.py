@@ -6,7 +6,7 @@ class Task(models.Model):
     _inherit = "project.task"
 
     def _find_mail_template(self):
-        template_id = int(self.env['ir.config_parameter'].sudo().get_param('processcontrol_sale_order.task_template'))
+        template_id = int(self.env['ir.config_parameter'].sudo().get_param('processcontrol_send_task_by_email.task_template'))
         template_id = self.env['mail.template'].search([('id', '=', template_id)]).id
         if not template_id:
             raise UserError('No se encontro plantilla para mail de tareas')
