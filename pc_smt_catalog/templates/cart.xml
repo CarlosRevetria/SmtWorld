@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--===================== Cart Page Banner =======================-->
+    <template id="cart_pc" inherit_id="website_sale.cart">
+        <xpath expr="//div[hasclass('oe_cart')]" position="attributes">
+            <attribute name="class">col-12 col-xl-12 oe_cart</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_cart')]/div/div/a[1]" position="replace">
+        </xpath>
+        <!--        <xpath expr="//div[hasclass('oe_cart')]/div/div/a[hasclass('')]" position="replace">-->
+        <!--        </xpath>-->
+        <xpath expr="//div[@id='o_cart_summary']" position="replace">
+            <!--            <t t-call="website_sale.short_cart_summary"/>-->
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <h2 class="title_catalog" style="margin-bottom:130px !important;">Request a Budget</h2>
+                <form action="/my/oppo/new" method="post" class="form form-add2car"
+                      enctype="multipart/form-data" id="file_upload_form">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="form-group" style="margin-bottom:100px !important;">
+                        <h3>Company details:</h3>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>Company Name:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px; border:1px solid grey !important;" type="text"
+                                               name="company_name" class="form-control" value=""
+                                               required="required"></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <label>Company Address:</label>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px; border:1px solid grey !important;" type="text"
+                                               name="company_address" class="form-control" value=""
+                                               required="required"></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <label>Name / Surname:</label>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px; border:1px solid grey !important;" type="text"
+                                               name="name_surname" class="form-control" value=""
+                                               required="required"></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <label>Email / Phone:</label>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px; border:1px solid grey !important;" type="text"
+                                               name="email_phone" class="form-control" value=""
+                                               required="required"></input>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group" style="margin-bottom:100px !important;">
+                        <h3>Tell us about current throughput in your production:</h3>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>1. Number of products required in production per year:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px; border:1px solid grey !important;" type="number"
+                                               name="products_required" class="form-control" value="0"></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>2. Required cycle-time per board:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px; border:1px solid grey !important;" type="number"
+                                               name="cycle_time" class="form-control" value="0"></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>3. Number of production shifts:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px; border:1px solid grey !important;" type="number"
+                                               name="production_shifts" class="form-control" value="0"></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>4. How many different types of boards?:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px; border:1px solid grey !important;" type="number"
+                                               name="different_types" class="form-control" value="0"></input>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <h3>Technical details:</h3>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>1. Description of the application and what are the customers
+                                                objectives:
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <textarea style=" border:1px solid grey !important;"
+                                                  name="description_application"
+                                                  class="form-control"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>2. Board dimensions and carries dimensions containing how many
+                                                boards:
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <textarea style=" border:1px solid grey !important;" name="board_dimensions"
+                                                  class="form-control"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>3. Material(s) types:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <textarea style=" border:1px solid grey !important;" name="materials_types"
+                                                  class="form-control"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>4. Types of Products that will be quoted:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <textarea style=" border:1px solid grey !important;" name="types_products"
+                                                  class="form-control"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>5. Geometry size. L/I/H mm:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <textarea style=" border:1px solid grey !important;" name="geometry_size"
+                                                  class="form-control"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group" style="margin-bottom:100px !important;">
+                        <h3>Budget + Deadline:</h3>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>1. Estimated budget:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px;border:1px solid grey !important;" type="number"
+                                               name="estimated_budget" class="form-control" value="0"></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20% !important; border:0px !important;">
+                                        <div class="form-group form-inline">
+                                            <label>2. Estimated closing date:</label>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px !important;">
+                                        <input style="margin-left:10px;border:1px solid grey !important;" type="date"
+                                               name="estimated_closing_date" class="form-control" value="0"></input>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button style="margin-top:130px !important; margin-bottom:50px !important;" id="btn_add2car"
+                            type="submit"
+                            class="btn btn-primary mb-2">
+                        Send Request
+                    </button>
+                </form>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="ajax_cart_success_template_pc" inherit_id="emipro_theme_base.ajax_cart_success_container"
+              name="Ajax Cart Success Template PC">
+        <xpath expr="//div[hasclass('ajax_cart_success_content')]" position="attributes">
+            <attribute name="class">ajax_cart_success_content d-flex align-content-center flex-wrap</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('ajax_cart_success_content')]" position="replace">
+            <t t-set="combination" t-value="product._get_first_possible_combination()"/>
+            <t t-set="combination_info"
+               t-value="product._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
+            <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+            <t t-set="cart_qty" t-value="website_sale_order.cart_quantity"/>
+            <section
+                    t-attf-class="container-fluid py-2 oe_website_sale #{'discount' if combination_info['has_discounted_price'] else ''}"
+                    id="product_detail">
+                <div class="row">
+                    <input type="hidden" class="cart_qty" t-att-value="cart_qty"/>
+                    <div class="product-name-container" id="product_details">
+                        <h1 itemprop="name" t-field="product.name" class="te_product_name">Product Name</h1>
+                    </div>
+                    <div class="shopping-line">
+                        <span>You added</span>
+                        <spant t-field="product.name" class="te_product_name">Product Name</spant>
+                        <span>to your</span>
+                        <a type='button' href='/shop/cart'>budget request.</a>
+                    </div>
+                    <div class="product-image-container">
+                        <span class="new_span d-flex h-100 justify-content-center align-items-center">
+                            <img t-if="product_variant"
+                                 t-attf-src="/web/image/product.product/#{product_variant.id}/image_256"
+                                 class="img img-fluid"
+                                 alt="Product image"/>
+                            <img t-else="" t-attf-src="/web/image/product.template/#{product.id}/image_256"
+                                 class="img img-fluid"
+                                 alt="Product image"/>
+                        </span>
+                    </div>
+                    <div class="ajax-sucess-bottom">
+                        <div class="te_cart_btn_">
+                            <a style="padding:10px !important;" role="button" href="https://www.mstechcorp.eu/products/"
+                               class="btn btn-secondary mb32 d-xl-inline-block ajax-sucess-continue te_theme_button">
+                                <span class="">More MSTECH Products</span>
+                            </a>
+                            <a style="padding:10px !important;" role="button"
+                               class="btn btn-primary float-right d-xl-inline-block ajax-sucess-checkout te_theme_button"
+                               href="/shop/cart">
+                                <span class="">Request a Budget</span>
+                                <span class="fa fa-chevron-right"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--=================== Product - > Este da error en produccion ========================-->
+    <!--    <template id="product_sticky_details_container_process"-->
+    <!--              inherit_id="theme_clarico_vega.product_sticky_details_container">-->
+    <!--        <xpath expr="//a[@id='add_to_cart']" position="replace">-->
+    <!--            <a role="button" id="add_to_cart_new"-->
+    <!--               t-attf-class="btn btn-primary btn-md mt16 a-submit te_theme_button te_add_to_cart #{'width-100' if not buy_now_show else 'width-50'}"-->
+    <!--               href="#">-->
+    <!--                Add-->
+    <!--            </a>-->
+    <!--        </xpath>-->
+    <!--    </template>-->
+    <template id="product_catalog" inherit_id="website_sale.product" name="product" priority="20">
+        <xpath expr="//section[@id='product_detail']" position="after">
+            <t t-if="product">
+                <t t-call="pc_smt_catalog.html_content_catalog_product"/>
+            </t>
+        </xpath>
+        <!--        <xpath expr="//section[@id='product_detail']//div[hasclass('row')][2]" position="before">-->
+        <!--            <t t-if="product">-->
+        <!--                <t t-call="pc_smt_catalog.html_content_catalog_product_iframe"/>-->
+        <!--            </t>-->
+        <!--        </xpath>-->
+        <!--        <xpath expr="//div[hasclass('row')]/div[hasclass('col-lg-6')][2]" position="attributes">-->
+        <!--            <attribute name="class">col-lg-12 col-md-12 col-sm-12 te_product_media</attribute>-->
+        <!--        </xpath>-->
+    </template>
+
+    <!--    <template id="product_catalog_cart" inherit_id="theme_clarico_vega.product_sticky_details_container"-->
+    <!--              name="product_cart_catalog" priority="200">-->
+    <!--        &lt;!&ndash;        <xpath expr="//div[hasclass('prod_add_cart')]/a/span" position="attributes">&ndash;&gt;-->
+    <!--        &lt;!&ndash;            <attribute name="class">fa fa-calculator</attribute>&ndash;&gt;-->
+    <!--        &lt;!&ndash;        </xpath>&ndash;&gt;-->
+    <!--        <xpath expr="//div[hasclass('product_details_sticky')]" position="replace">-->
+    <!--            <p>LOL</p>-->
+    <!--        </xpath>-->
+    <!--    </template>-->
+
+    <!--    <template id="html_content_catalog_product_iframe" name="Iframe Tour Virtual Product Catalog">-->
+    <!--        <iframe width="100%" height="500"-->
+    <!--                t-att-src="'https://www.youtube.com/embed/%s?controls=0' % product.url_tour_virtual"-->
+    <!--                title="YouTube video player" frameborder="0"-->
+    <!--                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
+    <!--                allowfullscreen="allowfullscreen"></iframe>-->
+    <!--    </template>-->
+
+    <template id="header_cart_icon" inherit_id="website_sale.header_cart_link" name="Header Cart Icon">
+        <xpath expr="//i[hasclass('fa-shopping-cart')]" position="attributes">
+            <attribute name="class">fa fa-calculator</attribute>
+        </xpath>
+    </template>
+
+    <template id="html_content_catalog_product" name="Detail Product Catalog">
+        <section class="product_catalog_description" style="margin-bottom:100px; margin-top:90px !important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!--                        Imagen-->
+                        <t t-set="product_images"
+                           t-value="product_variant._get_images() if product_variant else product._get_images()"/>
+                        <div id="o-carousel-product" class="carousel slide" data-ride="carousel" data-interval="0">
+                            <div class="carousel-outer position-relative">
+                                <div class="carousel-inner h-100">
+                                    <t t-foreach="product_images" t-as="product_image">
+                                        <div t-attf-class="carousel-item h-100#{' active' if product_image_first else ''}">
+                                            <div t-if="product_image._name == 'product.image' and product_image.embed_code"
+                                                 class="d-flex align-items-center justify-content-center h-100 embed-responsive embed-responsive-16by9">
+                                                <t t-raw="product_image.embed_code"/>
+                                            </div>
+                                            <div t-else="" t-field="product_image.image_1920"
+                                                 class="d-flex align-items-center justify-content-center h-100"
+                                                 t-options='{"widget": "image", "preview_image": "image_1024", "class": "product_detail_img mh-100", "alt-field": "name", "zoom": product_image.can_image_1024_be_zoomed and "image_1920", "itemprop": "image"}'/>
+                                        </div>
+                                    </t>
+                                </div>
+                                <t t-if="len(product_images) > 1">
+                                    <a class="carousel-control-prev" href="#o-carousel-product" role="button"
+                                       data-slide="prev">
+                                        <span class="fa fa-chevron-left p-2" role="img" aria-label="Previous"
+                                              title="Previous"/>
+                                    </a>
+                                    <a class="carousel-control-next" href="#o-carousel-product" role="button"
+                                       data-slide="next">
+                                        <span class="fa fa-chevron-right p-2" role="img" aria-label="Next"
+                                              title="Next"/>
+                                    </a>
+                                </t>
+                            </div>
+                            <div t-ignore="True" class="d-none d-md-block text-center">
+                                <ol t-if="len(product_images) > 1"
+                                    class="carousel-indicators d-inline-block position-static mx-auto my-0 p-1 text-left">
+                                    <t t-foreach="product_images" t-as="product_image">
+                                        <li t-attf-class="d-inline-block m-1 align-top {{'active' if product_image_first else ''}}"
+                                            data-target="#o-carousel-product"
+                                            t-att-data-slide-to="str(product_image_index)">
+                                            <div t-field="product_image.image_128"
+                                                 t-options='{"widget": "image", "qweb_img_responsive": False, "class": "o_image_64_contain", "alt-field": "name"}'/>
+                                            <i t-if="product_image._name == 'product.image' and product_image.embed_code"
+                                               class="fa fa-2x fa-play-circle-o o_product_video_thumb"/>
+                                        </li>
+                                    </t>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 grey-background">
+                        <!--                        Descripción producto-->
+                        <h2 class="title_catalog">
+                            <t t-esc="product.title"></t>
+                        </h2>
+                        <p>
+                            <strong>
+                                <t t-esc="product.short_description"></t>
+                            </strong>
+                        </p>
+                        <p>
+                            <t t-esc="product.long_description"></t>
+                        </p>
+                        <div class="row" style="margin-top:50px !important;">
+                            <div class="col-lg-2" t-if="product.features_column_1 and product.features_column_2">
+                                <a href="#features_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-features.png"/>
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="product.measures">
+                                <a href="#measures_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-measures.png"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="product.tech_details">
+                                <a href="#tech_details_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-tech-details.png"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="product.benefits1 or product.benefits2 or product.benefits3">
+                                <a href="#benefits_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-benefits.png"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="product.applications">
+                                <a href="#applications_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-application.png"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-lg-2" t-if="attachments">
+                                <a href="#downloads_box">
+                                    <img src="/pc_smt_catalog\static\src\img\icono-downloads.png"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <t t-if="product.url_tour_virtual">
+            <section style="margin-bottom:100px;">
+                <iframe width="100%" height="500"
+                        t-att-src="'https://www.youtube.com/embed/%s?controls=0' % product.url_tour_virtual"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen="allowfullscreen"></iframe>
+            </section>
+
+        </t>
+
+        <section class="product_catalog_features">
+            <div class="container">
+                <div class="row" style="margin-bottom:100px;"
+                     t-if="product.features_column_1 and product.features_column_2" id="features_box">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h2 class="title_catalog">FEATURES</h2>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <p>
+                            <t t-raw="product.features_column_1"></t>
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <p>
+                            <t t-raw="product.features_column_2"></t>
+                        </p>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:100px;">
+                    <div class="col-lg-6 col-md-6" t-if="product.measures" id="measures_box">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h2 class="title_catalog">MEASURES</h2>
+                        </div>
+                        <p>
+                            <span t-field="product.measures"
+                                  t-options="{'widget': 'image' }"
+                                  class="d-flex h-100 justify-content-center align-items-center"/>
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6" t-if="product.tech_details" id="tech_details_box">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h2 class="title_catalog">TECH DETAILS</h2>
+                        </div>
+                        <p>
+                            <t t-raw="product.tech_details"></t>
+                        </p>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:100px;"
+                     t-if="product.benefits1 or product.benefits2 or product.benefits3" id="benefits_box">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h2 class="title_catalog">BENEFITS</h2>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <span t-field="product.benefits1"
+                              t-if="product.benefits1"
+                              t-options="{'widget': 'image' }"
+                              class="d-flex h-100 justify-content-center align-items-center"/>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <span t-field="product.benefits2"
+                              t-if="product.benefits2"
+                              t-options="{'widget': 'image' }"
+                              class="d-flex h-100 justify-content-center align-items-center"/>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <span t-field="product.benefits3"
+                              t-if="product.benefits3"
+                              t-options="{'widget': 'image' }"
+                              class="d-flex h-100 justify-content-center align-items-center"/>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:100px;" t-if="product.applications" id="applications_box">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h2 class="title_catalog">APPLICATIONS</h2>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <t t-esc="product.applications"></t>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:100px;" t-if="attachments" id="downloads_box">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h2 class="title_catalog">DOWNLOADS</h2>
+                    </div>
+                    <div class="col-lg-12 col-md-12" id="box_download">
+                        <t t-if="attachments">
+                            <div class="product_attachment">
+                                <h4>Product Documents/Attachments</h4>
+
+                                <t t-foreach="attachments" t-as="attachment">
+                                    <form t-att-action="'/download/attachment?attachment_id=%i' % attachment.id"
+                                          method="post">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <button type="submit" class="btn btn-default" style="margin: 0 0 10px;">
+                                            <i class="fa fa-download"></i>
+                                            <span t-esc="attachment.file_name"/>
+                                        </button>
+                                    </form>
+                                </t>
+
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </template>
+</odoo>
